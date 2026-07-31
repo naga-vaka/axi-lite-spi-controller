@@ -63,6 +63,27 @@ The IP core was synthesized and implemented on a **Xilinx Virtex-7 FPGA (`xc7vx4
 
 ![Floorplan](docs/floorplan.png)
 
+
+### ⏱️ Timing Analysis & Performance (`report_timing_summary`)
+
+The design was constrained with a **100 MHz system clock** ($10.000\text{ ns}$ period) in `top_constraints.xdc` and evaluated post-Implementation in AMD Vivado.
+
+| Timing Metric | Value | Constraint / Target | Margin / Status |
+| :--- | :---: | :---: | :---: |
+| **Worst Negative Slack (WNS)** | **+5.301 ns** | $0.000\text{ ns}$ | **PASS** (Setup met) |
+| **Worst Hold Slack (WHS)** | **+0.113 ns** | $0.000\text{ ns}$ | **PASS** (Hold met) |
+| **Worst Pulse Width Slack (WPWS)** | **+4.500 ns** | $0.000\text{ ns}$ | **PASS** |
+| **Total Negative Slack (TNS)** | **0.000 ns** | $0.000\text{ ns}$ | **0 Failing Endpoints** |
+| **Total Hold Slack (THS)** | **0.000 ns** | $0.000\text{ ns}$ | **0 Failing Endpoints** |
+| **Maximum Frequency ($F_{\text{MAX}}$)** | **~212.8 MHz** | $100.0\text{ MHz}$ | **+112.8 MHz Overdesign Margin** |
+
+> **Timing Summary Highlights:**
+> * **Zero Failing Endpoints:** Out of 293 total timing endpoints, 0 setup/hold violations were reported.
+> * **Frequency Operating Headroom:** With a critical path delay of $T_{\text{clk}} - \text{WNS} = 10.000\text{ ns} - 5.301\text{ ns} = 4.699\text{ ns}$, the maximum clock frequency achievable on Virtex-7 is:
+>   
+>   $$F_{\text{MAX}} = \frac{1}{4.699\text{ ns}} \approx 212.8\text{ MHz}$$
+
+![Timing Summary Report](docs/timing_summary_report.png)
 ---
 
 ## 🧪 Verification & Simulation
