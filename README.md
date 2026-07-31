@@ -53,6 +53,8 @@ The IP core was synthesized and implemented on a **Xilinx Virtex-7 FPGA (`xc7vx4
 
 > **Resource Efficiency Highlight:** The entire SPI core controller (`spi_flash_controller.v`) consumes only **119 LUTs** and **64 Flip-Flops**, ensuring minimal area overhead when integrated as an IP block in larger System-on-Chip (SoC) architectures.
 
+![Utilization Report](docs/utilization_report.png)
+
 ### Timing Closure Results (100 MHz Target / 10ns Period)
 * **Worst Negative Slack (WNS):** `+5.301 ns` (PASS)
 * **Worst Hold Slack (WHS):** `+0.113 ns` (PASS)
