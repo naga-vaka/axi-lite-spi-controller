@@ -5,7 +5,7 @@
 ![Target](https://img.shields.io/badge/FPGA-Xilinx%20Virtex--7-green)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-A synthesizable, ultra-lightweight **AXI4-Lite Slave SPI Flash Controller IP Core** designed in Verilog. This core bridges CPU Memory-Mapped register transactions with physical SPI Flash memory peripherals (NOR Flash).
+A synthesizable AXI4-Lite slave SPI Flash Controller implemented in Verilog. The IP core bridges memory-mapped AXI4-Lite transactions with SPI NOR Flash devices through a register-based interface and demonstrates RTL design, finite state machine implementation, functional verification, and FPGA implementation using AMD Vivado.
 
 ---
 
@@ -13,8 +13,7 @@ A synthesizable, ultra-lightweight **AXI4-Lite Slave SPI Flash Controller IP Cor
 * **Full AXI4-Lite Slave Compliance:** Supports standard 32-bit single word read/write channel handshakes (`AW`, `W`, `B`, `AR`, `R`).
 * **Memory-Mapped Control:** Integrated 32-bit Register File providing software drivers complete control over SPI transactions.
 * **Hardware Execution Engine:** FSM-driven SPI master handling automatic Command, 24-bit Address phase shifting, and Data Tx/Rx.
-* **Fully Synthesizable & Timing Closed:** Verified with zero latch warnings, achieving positive setup/hold slack at 100 MHz target clock.
-
+* **Successfully synthesized and implemented in AMD Vivado while meeting all specified timing constraints for a 100 MHz target clock.
 ---
 
 ## 📐 Hardware Architecture
@@ -75,7 +74,7 @@ The design was constrained with a **100 MHz system clock** ($10.000\text{ ns}$ p
 | **Worst Pulse Width Slack (WPWS)** | **+4.500 ns** | $0.000\text{ ns}$ | **PASS** |
 | **Total Negative Slack (TNS)** | **0.000 ns** | $0.000\text{ ns}$ | **0 Failing Endpoints** |
 | **Total Hold Slack (THS)** | **0.000 ns** | $0.000\text{ ns}$ | **0 Failing Endpoints** |
-| **Maximum Frequency ($F_{\text{MAX}}$)** | **~212.8 MHz** | $100.0\text{ MHz}$ | **+112.8 MHz Overdesign Margin** |
+| **Maximum Frequency ($F_{\text{MAX}}$)** | **~212.8 MHz** | $100.0\text{ MHz}$ | **+112.8 MHz Timing Margin** |
 
 > **Timing Summary Highlights:**
 > * **Zero Failing Endpoints:** Out of 293 total timing endpoints, 0 setup/hold violations were reported.
@@ -95,6 +94,7 @@ Functional verification was conducted in Vivado Behavioral Simulator using a cus
   2. Issues AXI Write to `CTRL` register (`0x00`) setting Read Mode and asserting `Start`.
   3. Executes an AXI polling loop reading `STATUS` register (`0x04`) until `Busy` clears to `0`.
   4. Reads `DATA_R` register (`0x10`) and verifies received payload matches memory drive.
+  5. Functional verification was performed using a self-developed AXI4-Lite master testbench and SPI Flash behavioral model.
 
 ![Waveform Simulation](docs/timing_waveform.png)
 
@@ -107,7 +107,30 @@ Functional verification was conducted in Vivado Behavioral Simulator using a cus
 - [ ] **Interrupt Controller:** Add hardware interrupt line (`o_irq`) to eliminate CPU register polling loops.
 - [ ] **Embedded C Driver:** Add C hardware abstraction header (`spi_driver.h`) for bare-metal RISC-V / ARM microcontrollers.
 
----
 
+---
+## Skills Demonstrated
+
+• Verilog RTL Design
+
+• AXI4-Lite Protocol
+
+• SPI Protocol
+
+• Register Interface Design
+
+• FSM Design
+
+• Functional Verification
+
+• Testbench Development
+
+• FPGA Synthesis
+
+• FPGA Implementation
+
+• Timing Analysis
+
+• Resource Optimization
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
